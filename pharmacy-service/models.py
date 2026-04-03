@@ -9,7 +9,7 @@ class MedicineBase(BaseModel):
     unitPrice: float
     stockQuantity: int
     expiryDate: str
-
+ 
 
 class MedicineCreate(MedicineBase):
     pass
