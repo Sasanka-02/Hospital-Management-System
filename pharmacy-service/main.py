@@ -74,3 +74,4 @@ def update(med_id: int, medicine: MedicineCreate):
 def delete(med_id: int):
     if not service.delete_medicine(med_id):
         raise HTTPException(status_code=404, detail="Medicine not found")
+
