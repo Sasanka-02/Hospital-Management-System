@@ -33,8 +33,16 @@ def get_by_doctor(doctor_id: int) -> list:
     return [a for a in appointments.values() if a["doctorId"] == doctor_id]
 
 
-def insert(data: dict) -> dict:
+def insert(data: dict) -> dict | None:
     global _next_id
+    # Check for existing duplicate records
+    for appt in appointments.values():
+        if (appt["patientId"] == data["patientId"] and 
+            appt["doctorId"] == data["doctorId"] and 
+            appt["appointmentDate"] == data["appointmentDate"] and 
+            appt["appointmentTime"] == data["appointmentTime"]):
+            return None # Indicate a conflict found
+            
     new_record = {"id": _next_id, **data, "status": "SCHEDULED"}
     appointments[_next_id] = new_record
     _next_id += 1
